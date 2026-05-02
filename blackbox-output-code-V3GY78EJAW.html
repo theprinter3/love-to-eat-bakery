@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Love to Eat Bakery - Freshly Baked with Love</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --cream: #FFF8E7;
+            --warm-gold: #D4A574;
+            --deep-gold: #B8860B;
+            --soft-brown: #8B4513;
+            --warm-white: #FDF6E3;
+            --text-dark: #5C4033;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--cream) 0%, var(--warm-white) 100%);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* Header - Mobile Optimized */
+        header {
+            background: rgba(255, 248, 231, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.3);
+            padding: 8px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            height: 60px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 700;
+            color: var(--deep-gold);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background: rgba(255, 248, 231, 0.98);
+            backdrop-filter: blur(20px);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-links.active {
+            right: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1.3rem;
+            padding: 12px 24px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--warm-gold);
+            color: white;
+        }
+
+        .mobile-menu {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .mobile-menu.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .mobile-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Hero Section - Mobile Optimized */
+        .hero {
+            height: 100vh;
+            min-height: 100dvh;
+            background: linear-gradient(rgba(253, 246, 227, 0.9), rgba(255, 248, 231, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23FFF8E7" width="1200" height="800"/><circle fill="%23D4A574" opacity="0.1" cx="200" cy="200" r="150"/><circle fill="%23B8860B" opacity="0.05" cx="900" cy="300" r="200"/><path fill="%23D4A574" opacity="0.08" d="M100 600 Q400 500 800 650 Q1100 700 1100 750"/></svg>');
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        .hero-content {
+            max-width: 90vw;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            color: var(--soft-brown);
+            margin-bottom: 1.2rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-content p {
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--deep-gold);
+            color: white;
+            padding: clamp(1rem, 4vw, 1.25rem) clamp(2rem, 6vw, 3rem);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 12px 30px rgba(184, 134, 11, 0.4);
+            touch-action: manipulation;
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-button:hover,
+        .cta-button:active {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(184, 134, 11, 0.5);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        /* Menu Section - Mobile Grid */
+        .menu-section {
+            padding: 140px 0 80px;
+            background: var(--warm-white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            color: var(--soft-brown);
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: clamp(1.5rem, 4vw, 2rem);
+            margin-top: 2rem;
+        }
+
+        .menu-item {
+            background: white;
+            padding: clamp(1.5rem, 5vw, 2rem);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(212, 165, 116, 0.15);
+            position: relative;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--warm-gold), var(--deep-gold));
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .menu-item:active {
+            transform: translateY(-2px);
+        }
+
+        .menu-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 4vw, 1.5rem);
+            color: var(--soft-brown);
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .price {
+            font-size: clamp(1.5rem, 5vw, 1.8rem);
+            font-weight: 700;
+            color: var(--deep-gold);
+            margin: 0.8rem 0 1rem 0;
+        }
+
+        /* Reviews Section - Mobile Optimized */
+        .reviews-section {
+            padding: 80px 0;
+            background: var(--cream);
+        }
+
+        .google-reviews {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .review-item {
+            display: flex;
+            gap: 1rem;
+            padding: clamp(1.5rem, 5vw, 2rem);
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .review-avatar {
+            width: clamp(50px, 15vw, 60px);
+            height: clamp(50px, 15vw, 60px);
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--warm-gold), var(--deep-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            flex-shrink: 0;
+        }
+
+        .review-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .stars {
+            color: #FFD700;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--soft-brown);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section - Mobile Grid */
+        .contact-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(1.5rem, 4vw, 2rem);
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            padding: clamp(1.5rem, 5vw, 2rem);
+        }
+
+        .contact-item i {
+            font-size: clamp(1.8rem, 6vw, 2rem);
+            color: var(--deep-gold);
+            margin-bottom: 1rem;
+        }
+
+        .contact-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--soft-brown);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--soft-brown);
+            color: white;
+            text-align: center;
+            padding: clamp(2rem, 8vw, 3rem) 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* Safe area support for iPhone X+ */
+        @supports (padding: max(0px)) {
+            header {
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+            }
+            
+            .hero {
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#home" class="logo" aria-label="Love to Eat Bakery">Love to Eat</a>
+            <ul class="nav-links" id="navLinks" role="navigation">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="animate">Love to Eat</h1>
+            <p class="animate">Freshly baked with love, every bite tells a story</p>
+            <a href="#menu" class="cta-button animate" aria-label="Explore Menu">Explore Menu</a>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <h2 class="section-title animate">Our Menu</h2>
+            <div class="menu-grid">
+                <div class="menu-item animate">
+                    <h3>Classic Croissants</h3>
+                    <div class="price">$4.50</div>
+                    <p>Buttery, flaky perfection made fresh every morning. Golden crust with a soft, airy center.</p>
+                </div>
+                <div class="menu-item animate">
+                    <h3>Chocolate Almond Croissant</h3>
+                    <div class="price">$5.25</div>
+                    <p>Rich dark chocolate and toasted almonds wrapped in our signature croissant dough.</p>
+                </div>
+                <div class="menu-item animate">
+                    <h3>Fresh Sourdough</h3>
+                    <div class="price">$6.00</div>
+                    <p>Handcrafted with organic flour, naturally fermented for 24 hours. Perfect crust.</p>
+                </div>
+                <div class="menu-item animate">
+                    <h3>Vanilla Bean Brioche</h3>
+                    <div class="price">$4.75</div>
+                    <p>Soft, buttery brioche infused with real Madagascar vanilla beans.</p>
+                </div>
+                <div class="menu-item animate">
+                    <h3>Seasonal Fruit Danish</h3>
+                    <div class="price">$5.50</div>
+                    <p>Fresh seasonal fruits with house-made custard in flaky pastry.</p>
+                </div>
+                <div class="menu-item animate">
+                    <h3>Artisan Baguette</h3>
+                    <div class="price">$4.00</div>
+                    <p>Traditional French baguette with crisp crust and open crumb structure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews-section">
+        <div class="container">
+            <h2 class="section-title animate">What Our Customers Say</h2>
+            <div class="google-reviews">
+                <div class="review-item animate">
+                    <div class="review-avatar">JS</div>
+                    <div class="review-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Best bakery in town! The croissants are absolutely incredible - flaky, buttery perfection."</p>
+                        <div class="review-author">Jessica S. ★★★★★</div>
+                    </div>
+                </div>
+                <div class="review-item animate">
+                    <div class="review-avatar">MR</div>
+                    <div class="review-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"I've tried bakeries all over the city, but Love to Eat is by far the best."</p>
+                        <div class="review-author">Michael R. ★★★★★</div>
+                    </div>
+                </div>
+                <div class="review-item animate">
+                    <div class="review-avatar">SL</div>
+                    <div class="review-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"The seasonal fruit danish changed my life. Seriously, best pastry I've ever had!"</p>
+                        <div class="review-author">Sarah L. ★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title animate">Visit Us</h2>
+            <div class="contact-info">
+                <div class="contact-item animate">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Location</h3>
+                    <p>123 Baker Street<br>Anytown, CA 90210</p>
+                </div>
+                <div class="contact-item animate">
+                    <i class="fas fa-clock"></i>
+                    <h3>Hours</h3>
+                    <p>Mon-Fri: 7AM - 6PM<br>Sat-Sun: 8AM - 5PM</p>
+                </div>
+                <div class="contact-item animate">
+                    <i class="fas fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p>(555) 123-4567</p>
+                </div>
+                <div class="contact-item animate">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>hello@lovetoeatbakery.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Love to Eat Bakery. Made with <i class="fas fa-heart" style="color: #ff6b6b;"></i> and fresh flour.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        const body = document.body;
+
+        mobileMenu.addEventListener('click', () => {
+            const isActive = mobileMenu.classList.contains('active');
+            
+            mobileMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            body.classList.toggle('no-scroll', !isActive);
+            
+            mobileMenu.setAttribute('aria-expanded', !isActive);
+        });
+
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.classList.remove('no-scroll');
+                mobileMenu.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Prevent body scroll when mobile menu is open
+        body.classList.add('no-scroll');
+        body.classList.remove('no-scroll');
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -10% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = `${index * 0.1}s`;
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+        // Active nav link highlighting
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section[id]');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === `#${current}`) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        // Improve touch interactions
+        let touchStartY = 0;
+        document.addEventListener('touchstart', e => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', e => {
+            const touchY = e.touches[0].clientY;
+            const deltaY = touchStartY - touchY;
+            
+            if (Math.abs(deltaY) > 10) {
+                // Close mobile menu on swipe
+                if (navLinks.classList.contains('active') && deltaY > 0) {
+                    mobileMenu.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    body.classList.remove('no-scroll');
+                }
+            }
+        }, { passive: true });
+
+        // PWA-like performance
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(() => {});
+            });
+        }
+
+        // Add no-scroll class to body
+        const style = document.createElement('style');
+        style.textContent = `
+            body.no-scroll {
+                overflow: hidden;
+                position: fixed;
+                width: 100%;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
